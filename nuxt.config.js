@@ -26,6 +26,9 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   mode: 'spa',
+  router: {
+    middleware: 'router-auth'
+  },
   /*
   ** Build configuration
   */

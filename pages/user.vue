@@ -6,16 +6,35 @@
       </div>
       <v-card>
         <p v-for="user in users">{{ user.value }}</p>
+
+        {{ user }}
+
+        <v-btn class="signIn mb-2" primary @click="logout">Logout</v-btn>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import { fireDB, fireAuth } from '~/plugins/vuefire.js'
+
 export default {
   firebase () {
     return {
-      users: this.fireDB.ref('/')
+      users: fireDB.ref('/')
+    }
+  },
+
+  computed: {
+    user () {
+      return fireAuth.currentUser
+    }
+  },
+
+  methods: {
+    // Move this to drawer..
+    logout () {
+      fireAuth.signOut()
     }
   }
 }
