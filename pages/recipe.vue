@@ -1,15 +1,26 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-xs-center">
-        {{ user }}
-      </div>
-      <br><br>
+    <v-flex>
+      <v-btn class="mb-2" primary @click="logout">Logout</v-btn>
       <v-card>
-        <p v-for="recipe in recipes">{{ recipe }}</p>
-      </v-card>
+        <v-toolbar color="cyan" dark>
+          <v-toolbar-title>Recepten</v-toolbar-title>
+        </v-toolbar>
 
-      <v-btn class="signIn mb-2" primary @click="logout">Logout</v-btn>
+        <v-list two-line>
+          <template v-for="(recipe, index) in recipes">
+            <v-list-tile
+              :key="recipe.Name"
+              @click=""
+            >
+              <v-list-tile-content>
+                <v-list-tile-title v-html="recipe.Name"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="recipe.Text"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+        </v-list>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
