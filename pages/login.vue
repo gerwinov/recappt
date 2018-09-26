@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <login-form></login-form>
+    <nuxt-link to="/register">Registreren</nuxt-link>
   </v-container>
 </template>
 

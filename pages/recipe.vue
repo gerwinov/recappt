@@ -2,15 +2,14 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <div class="text-xs-center">
-        <img src="/v.png" alt="Vuetify.js" class="mb-5" />
-      </div>
-      <v-card>
-        <p v-for="user in users">{{ user.value }}</p>
-
         {{ user }}
-
-        <v-btn class="signIn mb-2" primary @click="logout">Logout</v-btn>
+      </div>
+      <br><br>
+      <v-card>
+        <p v-for="recipe in recipes">{{ recipe }}</p>
       </v-card>
+
+      <v-btn class="signIn mb-2" primary @click="logout">Logout</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -21,7 +20,7 @@ import { fireDB, fireAuth } from '~/plugins/vuefire.js'
 export default {
   firebase () {
     return {
-      users: fireDB.ref('/')
+      recipes: fireDB.ref('/Recipes')
     }
   },
 
@@ -35,6 +34,9 @@ export default {
     // Move this to drawer..
     logout () {
       fireAuth.signOut()
+        .then((response) => {
+          this.$router.push('/login')
+        })
     }
   }
 }

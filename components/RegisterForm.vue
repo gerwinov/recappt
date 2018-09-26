@@ -12,7 +12,7 @@
         type="password"
         required
       ></v-text-field>
-     <v-btn class="signIn mb-2" primary @click="login">Login</v-btn>
+     <v-btn class="register mb-2" primary @click="register">Register</v-btn>
     </v-flex>
   </v-layout>
 
@@ -25,14 +25,20 @@ export default {
   data () {
     return {
       name: '',
-      password: ''
+      password: '',
+      errorCode: null,
+      errorMessage: null
     }
   },
   methods: {
-    login () {
-      fireAuth.signInWithEmailAndPassword(this.name, this.password)
+    register () {
+      fireAuth.createUserWithEmailAndPassword(this.name, this.password)
         .then((response) => {
           this.$router.push('/recipe')
+        })
+        .catch((error) => {
+          this.errorCode = error.code
+          this.errorMessage = error.message
         })
     }
   }
