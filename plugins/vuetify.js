@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from "vue"
 import {
   Vuetify,
   VApp,
@@ -11,7 +11,7 @@ import {
   VGrid,
   VToolbar,
   VTextField
-} from 'vuetify'
+} from "vuetify"
 
 Vue.use(Vuetify, {
   components: {

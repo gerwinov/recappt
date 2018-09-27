@@ -5,38 +5,39 @@
         v-model="name"
         label="Name"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-model="password"
         label="Password"
         type="password"
         required
-      ></v-text-field>
-     <v-btn class="register mb-2" primary @click="register">Register</v-btn>
+      />
+      <v-btn class="register mb-2" primary @click="register">Register</v-btn>
     </v-flex>
   </v-layout>
 
 </template>
 
 <script>
-import { fireAuth } from '~/plugins/vuefire.js'
+import { fireAuth } from "~/plugins/vuefire.js"
 
 export default {
-  data () {
+  data() {
     return {
-      name: '',
-      password: '',
+      name: "",
+      password: "",
       errorCode: null,
       errorMessage: null
     }
   },
   methods: {
-    register () {
-      fireAuth.createUserWithEmailAndPassword(this.name, this.password)
-        .then((response) => {
-          this.$router.push('/recipe')
+    register() {
+      fireAuth
+        .createUserWithEmailAndPassword(this.name, this.password)
+        .then(() => {
+          this.$router.push("/recipe")
         })
-        .catch((error) => {
+        .catch(error => {
           this.errorCode = error.code
           this.errorMessage = error.message
         })

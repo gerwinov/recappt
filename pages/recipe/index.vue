@@ -11,12 +11,12 @@
         <v-list two-line>
           <template v-for="(recipe, index) in recipes">
             <v-list-tile
-              :key="recipe.name"
-              @click=""
+              :key="'recipe' + index"
+              @click="alert('tett')"
             >
               <v-list-tile-content>
-                <v-list-tile-title v-html="recipe.name"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="recipe.text"></v-list-tile-sub-title>
+                <v-list-tile-title v-html="recipe.name"/>
+                <v-list-tile-sub-title v-html="recipe.text"/>
               </v-list-tile-content>
             </v-list-tile>
           </template>
@@ -27,28 +27,32 @@
 </template>
 
 <script>
-import { fireDB, fireAuth } from '~/plugins/vuefire.js'
+import { fireDB, fireAuth } from "~/plugins/vuefire.js"
 
 export default {
-  firebase () {
+  firebase() {
     return {
       recipes: fireDB.ref(`/Recipes/${this.user.uid}`)
     }
   },
 
   computed: {
-    user () {
+    user() {
       return fireAuth.currentUser
     }
   },
 
+  mounted() {
+    console.log("test")
+    console.log(fireAuth)
+  },
+
   methods: {
     // Move this to drawer..
-    logout () {
-      fireAuth.signOut()
-        .then((response) => {
-          this.$router.push('/login')
-        })
+    logout() {
+      fireAuth.signOut().then(() => {
+        this.$router.push("/login")
+      })
     }
   }
 }

@@ -5,29 +5,29 @@
         v-model="name"
         label="Name"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-model="text"
         label="Text"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-model="rating"
         label="Rating"
         type="number"
-      ></v-text-field>
+      />
       <v-text-field
         v-model="ratingComments"
         label="Rating comments"
         type="text"
-      ></v-text-field>
-     <v-btn class="register mb-2" primary @click="addRecipe">Toevoegen</v-btn>
+      />
+      <v-btn class="register mb-2" primary @click="addRecipe">Toevoegen</v-btn>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import { fireDB, fireAuth } from '~/plugins/vuefire.js'
+import { fireDB, fireAuth } from "~/plugins/vuefire.js"
 
 export default {
   // firebase () {
@@ -36,36 +36,39 @@ export default {
   //   }
   // },
 
-  data () {
+  data() {
     return {
-      name: '',
-      text: '',
+      name: "",
+      text: "",
       rating: 0,
-      ratingComments: ''
+      ratingComments: ""
     }
   },
 
   computed: {
-    user () {
+    user() {
       return fireAuth.currentUser
     }
   },
 
   methods: {
     // Move this to drawer..
-    addRecipe () {
-      fireDB.ref(`/Recipes/${this.user.uid}`).push({
-        name: this.name,
-        text: this.text,
-        rating: this.rating,
-        ratingComments: this.ratingComments
-      }, (error) => {
-        if (error) {
-          console.log(error)
-          return
+    addRecipe() {
+      fireDB.ref(`/Recipes/${this.user.uid}`).push(
+        {
+          name: this.name,
+          text: this.text,
+          rating: this.rating,
+          ratingComments: this.ratingComments
+        },
+        error => {
+          if (error) {
+            console.log(error)
+            return
+          }
+          this.$router.push("/recipe")
         }
-        this.$router.push('/recipe')
-      })
+      )
     }
   }
 }

@@ -5,35 +5,45 @@
         v-model="name"
         label="Name"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-model="password"
         label="Password"
         type="password"
         required
-      ></v-text-field>
-     <v-btn class="signIn mb-2" primary @click="login">Login</v-btn>
+      />
+      <v-btn class="signIn mb-2" primary @click="login">Login</v-btn>
     </v-flex>
   </v-layout>
 
 </template>
 
 <script>
-import { fireAuth } from '~/plugins/vuefire.js'
+import { fireAuth } from "~/plugins/vuefire.js"
 
 export default {
-  data () {
+  data() {
     return {
-      name: '',
-      password: ''
+      name: "",
+      password: ""
     }
   },
+
+  computed: {
+    user() {
+      return fireAuth.currentUser
+    }
+  },
+
   methods: {
-    login () {
-      fireAuth.signInWithEmailAndPassword(this.name, this.password)
-        .then((response) => {
-          this.$router.push('/recipe')
-        })
+    login() {
+      fireAuth.setPersistence("local").then(() => {
+        fireAuth
+          .signInWithEmailAndPassword(this.name, this.password)
+          .then(() => {
+            this.$router.push("/recipe")
+          })
+      })
     }
   }
 }
