@@ -2,26 +2,14 @@
   <v-layout column justify-center align-center>
     <v-flex>
       <v-btn class="mb-2" primary @click="logout">Logout</v-btn>
-      <nuxt-link to="/recipe/new">nieuw recept</nuxt-link>
+
       <v-card>
         <v-toolbar color="cyan" dark>
           <v-toolbar-title>Recepten</v-toolbar-title>
         </v-toolbar>
 
-        <v-list two-line>
-          <template v-for="(recipe, index) in recipes">
-            <v-list-tile
-              :key="'recipe' + index"
-              :to="{ name: 'recipe-id', params: { id: recipe['.key'] }}"
-              nuxt
-            >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="recipe.name"/>
-                <v-list-tile-sub-title v-html="recipe.text"/>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-        </v-list>
+        {{ recipe }}
+
       </v-card>
     </v-flex>
   </v-layout>
@@ -33,13 +21,16 @@ import { fireDB, fireAuth } from "~/plugins/vuefire.js"
 export default {
   firebase() {
     return {
-      recipes: fireDB.ref(`/Recipes/${this.user.uid}`)
+      recipe: fireDB.ref(`/Recipes/${this.user.uid}/${this.id}`)
     }
   },
 
   computed: {
     user() {
       if (this.$store.getters.isLoggedIn) return this.$store.state.user
+    },
+    id() {
+      return this.$route.params.id
     }
   },
 
