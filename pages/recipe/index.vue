@@ -38,13 +38,8 @@ export default {
 
   computed: {
     user() {
-      return fireAuth.currentUser
+      if (this.$store.getters.isLoggedIn) return this.$store.state.user
     }
-  },
-
-  mounted() {
-    console.log("test")
-    console.log(fireAuth)
   },
 
   methods: {

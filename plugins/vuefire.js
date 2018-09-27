@@ -18,20 +18,6 @@ let firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(config)
   : firebase
 
-// Register fireDB globally
-// Vue.mixin({
-//   data () {
-//     return {
-//       get fireDB () {
-//         return firebaseApp.database()
-//       },
-//       get fireAuth () {
-//         return firebaseApp.auth()
-//       }
-//     }
-//   }
-// })
-
 export const fireDB = firebaseApp.database()
 export const fireAuth = firebaseApp.auth()
 
