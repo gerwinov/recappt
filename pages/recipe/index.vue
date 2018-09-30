@@ -1,30 +1,30 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex>
-      <v-btn class="mb-2" primary @click="logout">Logout</v-btn>
-      <nuxt-link to="/recipe/new">nieuw recept</nuxt-link>
-      <v-card>
-        <v-toolbar color="cyan" dark>
-          <v-toolbar-title>Recepten</v-toolbar-title>
-        </v-toolbar>
-
-        <v-list two-line>
-          <template v-for="(recipe, index) in recipes">
-            <v-list-tile
-              :key="'recipe' + index"
-              :to="{ name: 'recipe-id', params: { id: recipe['.key'] }}"
-              nuxt
-            >
-              <v-list-tile-content>
-                <v-list-tile-title v-html="recipe.name"/>
-                <v-list-tile-sub-title v-html="recipe.text"/>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-card>
+    <v-toolbar dark color="primary">
+      <v-toolbar-title>Mijn recepten</v-toolbar-title>
+    </v-toolbar>
+    <v-card-text>
+      <v-expansion-panel>
+        <v-expansion-panel-content v-for="(recipe, index) in recipes" :key="'recipe' + index">
+          <div slot="header">{{ recipe.name }}</div>
+          <v-card>
+            <v-card-text>Wat moet hier komen te staan?</v-card-text>
+            <v-card-actions>
+              <v-rating :value="recipe.rating" readonly />
+              <v-spacer />
+              <v-btn color="error" @click="deleteItem(recipe['.key'])">Verwijderen</v-btn>
+              <v-btn :to="{ name: 'recipe-id', params: { id: recipe['.key'] }}" nuxt color="primary">Open</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer />
+      <v-btn to="/recipe/new" nuxt color="primary">Nieuw recept</v-btn>
+      <v-btn flat color="primary" @click="logout">Uitloggen</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -44,11 +44,14 @@ export default {
   },
 
   methods: {
-    // Move this to drawer..
     logout() {
       fireAuth.signOut().then(() => {
-        this.$router.push("/login")
+        this.$router.push("/")
       })
+    },
+
+    deleteItem(id) {
+      this.$firebaseRefs.recipes.child(id).remove()
     }
   }
 }

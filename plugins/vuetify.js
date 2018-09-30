@@ -10,7 +10,14 @@ import {
   VIcon,
   VGrid,
   VToolbar,
-  VTextField
+  VTextField,
+  VForm,
+  VAlert,
+  VImg,
+  VExpansionPanel,
+  VRating,
+  VTextarea,
+  VProgressCircular
 } from "vuetify"
 
 Vue.use(Vuetify, {
@@ -24,6 +31,13 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
-    VTextField
+    VTextField,
+    VForm,
+    VAlert,
+    VImg,
+    VExpansionPanel,
+    VRating,
+    VTextarea,
+    VProgressCircular
   }
 })
