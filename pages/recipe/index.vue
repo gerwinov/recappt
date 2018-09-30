@@ -1,5 +1,8 @@
 <template>
-  <v-card>
+  <div v-if="!loaded" class="text-xs-center">
+    <v-progress-circular :size="70" :width="7" color="primary" indeterminate />
+  </div>
+  <v-card v-else>
     <v-toolbar dark color="primary">
       <v-toolbar-title>Mijn recepten</v-toolbar-title>
     </v-toolbar>
@@ -33,7 +36,19 @@ import { fireDB, fireAuth } from "~/plugins/vuefire.js"
 export default {
   firebase() {
     return {
-      recipes: fireDB.ref(`/Recipes/${this.user.uid}`)
+      recipes: {
+        source: fireDB.ref(`/Recipes/${this.user.uid}`),
+        asObject: false,
+        readyCallback: () => {
+          this.loaded = true
+        }
+      }
+    }
+  },
+
+  data() {
+    return {
+      loaded: false
     }
   },
 

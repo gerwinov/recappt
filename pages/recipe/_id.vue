@@ -16,6 +16,7 @@
         <v-rating v-model="recipe.rating" @input="updateRecipe" />
         <v-textarea v-model="recipe.ratingComments" :error="hasError" label="Beschrijving bij beoordeling" hint="Wat vond je er zelf van?" required auto-grow @input="error = null" @change="updateRecipe" />
       </v-form>
+      <recipe-media :id="id" />
     </v-card-text>
     <v-card-actions>
       <v-btn flat to="/recipe" nuxt color="primary">Terug</v-btn>
@@ -25,8 +26,13 @@
 
 <script>
 import { fireDB } from "~/plugins/vuefire.js"
+import RecipeMedia from "~/components/RecipeMedia"
 
 export default {
+  components: {
+    RecipeMedia
+  },
+
   firebase() {
     return {
       recipe: {

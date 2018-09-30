@@ -15,6 +15,7 @@
   "dependencies": {
     "firebase": "^5.5.2",
     "nuxt": "^2.0.0",
+    "vue-web-cam": "^1.2.3",
     "vuefire": "^1.4.5",
     "vuetify": "^1.2.5",
     "vuex-persist": "^1.6.1"
