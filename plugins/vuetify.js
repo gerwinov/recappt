@@ -18,7 +18,8 @@ import {
   VRating,
   VTextarea,
   VProgressCircular,
-  VSelect
+  VSelect,
+  VDialog
 } from "vuetify"
 
 Vue.use(Vuetify, {
@@ -40,6 +41,7 @@ Vue.use(Vuetify, {
     VRating,
     VTextarea,
     VProgressCircular,
-    VSelect
+    VSelect,
+    VDialog
   }
 })

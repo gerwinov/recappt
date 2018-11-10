@@ -3,6 +3,7 @@ import VueFire from "vuefire"
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/database"
+import "firebase/storage"
 
 // This should go in .env! These are dev variables.
 let config = {
@@ -20,5 +21,6 @@ let firebaseApp = !firebase.apps.length
 
 export const fireDB = firebaseApp.database()
 export const fireAuth = firebaseApp.auth()
+export const fireStorage = firebaseApp.storage()
 
 Vue.use(VueFire)

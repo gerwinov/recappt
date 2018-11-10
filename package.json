@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev-network": "NUXT_HOST=192.168.2.103 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -13,6 +14,7 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@outluch/v-file": "^1.0.0",
     "firebase": "^5.5.2",
     "nuxt": "^2.0.0",
     "vue-web-cam": "^1.2.3",

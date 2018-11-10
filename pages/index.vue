@@ -23,6 +23,12 @@ export default {
     return {
       bannerImg: bannerImg
     }
+  },
+
+  created() {
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.push("/recipe")
+    }
   }
 }
 </script>
