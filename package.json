@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "dev-network": "NUXT_HOST=192.168.2.103 nuxt",
+    "dev-network": "NUXT_HOST=192.168.2.15 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -20,6 +20,7 @@
     "vue-web-cam": "^1.2.3",
     "vuefire": "^1.4.5",
     "vuetify": "^1.2.5",
+    "vuetify-upload-button": "^1.2.0",
     "vuex-persist": "^1.6.1"
   },
   "devDependencies": {

@@ -32,11 +32,15 @@
       </v-img>
     </v-dialog>
 
-    <v-file @change="uploadImage">
-      <v-btn color="primary">Foto uploaden</v-btn>
-    </v-file>
+    <!-- <v-file @change="uploadImage">
+      <v-btn color="primary">Foto toevoegen</v-btn>
+    </v-file> -->
 
-    <v-btn color="primary" @click="webcamDialog = true">Foto maken</v-btn>
+    <upload-btn
+      :file-changed-callback="uploadImage"
+      title="Foto toevoegen" />
+
+      <!--     <v-btn color="primary" @click="webcamDialog = true">Foto maken</v-btn>
 
     <v-dialog v-model="webcamDialog" full-width transition="dialog-bottom-transition">
       <v-toolbar dark color="primary">
@@ -54,21 +58,23 @@
         <v-btn v-if="deviceId" color="primary" @click="takePhoto">Foto maken</v-btn>
         <web-cam ref="webcam" :device-id="deviceId" @cameras="onCameras"/>
       </v-card>
-    </v-dialog>
+    </v-dialog>-->
   </v-card>
 </template>
 
 <script>
 import { fireDB, fireStorage } from "~/plugins/vuefire.js"
-import { WebCam } from "vue-web-cam"
-import VFile from "@outluch/v-file"
+// import { WebCam } from "vue-web-cam"
+// import VFile from "@outluch/v-file"
+import UploadButton from "vuetify-upload-button"
 
 export default {
   name: "RecipeMedia",
 
   components: {
-    WebCam,
-    "v-file": VFile
+    // WebCam,
+    // "v-file": VFile
+    "upload-btn": UploadButton
   },
 
   props: {
@@ -95,12 +101,12 @@ export default {
       error: null,
       dialogImg: null,
       loaded: false,
-      devices: [],
-      deviceId: null,
-      img: null,
+      // devices: [],
+      // deviceId: null,
+      // img: null,
       uploadTask: "",
-      progressUpload: 0,
-      webcamDialog: false
+      progressUpload: 0 //,
+      // webcamDialog: false
     }
   },
 
@@ -139,29 +145,29 @@ export default {
   },
 
   methods: {
-    takePhoto() {
-      let img = this.$refs.webcam.capture()
+    // takePhoto() {
+    //   let img = this.$refs.webcam.capture()
 
-      let type = img.split(";")[0].split(":")[1]
+    //   let type = img.split(";")[0].split(":")[1]
 
-      fetch(img)
-        .then(res => res.blob())
-        .then(blob => {
-          const file = new File([blob], "photo", {
-            type: type
-          })
-          this.uploadImage(file)
-          this.webcamDialog = false
-        })
-    },
+    //   fetch(img)
+    //     .then(res => res.blob())
+    //     .then(blob => {
+    //       const file = new File([blob], "photo", {
+    //         type: type
+    //       })
+    //       this.uploadImage(file)
+    //       this.webcamDialog = false
+    //     })
+    // },
 
-    onCameras(cameras) {
-      this.devices = cameras
-    },
+    // onCameras(cameras) {
+    //   this.devices = cameras
+    // },
 
-    setCamera(camera) {
-      this.deviceId = camera
-    },
+    // setCamera(camera) {
+    //   this.deviceId = camera
+    // },
 
     uploadImage(file) {
       let name = file.name.split(".")[0] + "_" + Date.now()

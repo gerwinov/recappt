@@ -22,6 +22,8 @@ import {
   VDialog
 } from "vuetify"
 
+// import { Ripple } from "vuetify/directives"
+
 Vue.use(Vuetify, {
   components: {
     VApp,
@@ -44,4 +46,7 @@ Vue.use(Vuetify, {
     VSelect,
     VDialog
   }
+  // directives: {
+  //   Ripple
+  // }
 })
